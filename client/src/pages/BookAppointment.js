@@ -112,19 +112,22 @@ function BookAppointment() {
           </h1>
           <hr />
           <Row gutter={20} className="mt-5" align="middle">
-
             <Col span={8} sm={24} xs={24} lg={8}>
               <img
                 src="https://thumbs.dreamstime.com/b/finger-press-book-now-button-booking-reservation-icon-online-149789867.jpg"
                 alt=""
                 width="100%"
-                height='400'
+                height="400"
               />
             </Col>
             <Col span={8} sm={24} xs={24} lg={8}>
               <h1 className="normal-text">
                 <b>Timings :</b> {doctor.timings[0]} - {doctor.timings[1]}
               </h1>
+              <p>
+                <b>Specialization : </b>
+                {doctor.specialization}
+              </p>
               <p>
                 <b>Phone Number : </b>
                 {doctor.phoneNumber}
@@ -135,7 +138,11 @@ function BookAppointment() {
               </p>
               <p>
                 <b>Fee per Visit : </b>
-                {doctor.feePerCunsultation}
+                {doctor.feePerConsultation}
+              </p>
+              <p>
+                <b>Experience : </b>
+                {doctor.experience}
               </p>
               <p>
                 <b>Website : </b>
@@ -144,20 +151,17 @@ function BookAppointment() {
               <div className="d-flex flex-column pt-2 mt-2">
                 <DatePicker
                   format="DD-MM-YYYY"
-                  onChange={(value) =>{
+                  onChange={(value) => {
                     setIsAvailable(false);
-                    setDate(value.format("DD-MM-YYYY"))
-                    
+                    setDate(value.format("DD-MM-YYYY"));
                   }}
-                  
                 />
                 <TimePicker
                   format="HH:mm"
                   className="mt-3"
                   onChange={(value) => {
                     setIsAvailable(false);
-                    setTime(value.format("HH:mm"))
-
+                    setTime(value.format("HH:mm"));
                   }}
                 />
 

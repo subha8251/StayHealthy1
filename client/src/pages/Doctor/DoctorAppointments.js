@@ -23,9 +23,12 @@ function DoctorAppointments() {
       );
       dispatch(hideLoading());
       if (resposne.data.success) {
+        //console.log(resposne.data);
         setAppointments(resposne.data.data);
+        //console.log(resposne.data.data);
       }
     } catch (error) {
+      //console.log(error);
       dispatch(hideLoading());
     }
   };

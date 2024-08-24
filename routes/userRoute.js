@@ -64,6 +64,7 @@ router.get("/get-user-info-by-id", authMiddleware, async (req, res) => {
 router.post("/apply-doctor-account", authMiddleware, async (req, res) => {
   try {
     const newDoctor = new Doctor({ ...req.body, status: "pending" });
+    console.log(req.body);
     await newDoctor.save();
 
     const adminUser = await User.findOne({ isAdmin: true });
@@ -85,6 +86,8 @@ router.post("/apply-doctor-account", authMiddleware, async (req, res) => {
     res.status(500).send({ message: "Error applying doctor account", success: false, error });
   }
 });
+
+
 
 router.post("/mark-all-notifications-as-seen", authMiddleware, async (req, res) => {
   try {

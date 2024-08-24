@@ -5,6 +5,15 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const Appointment = require("../models/appointmentModel");
 const User = require("../models/userModel");
 
+router.get('/approved', async (req, res) => {
+  try {
+    const doctors = await Doctor.find({ status: 'approved' });
+    res.json(doctors);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.post("/get-doctor-info-by-user-id", authMiddleware, async (req, res) => {
   try {
     const doctor = await Doctor.findOne({ userId: req.body.userId });
@@ -59,10 +68,12 @@ router.get(
     try {
       const doctor = await Doctor.findOne({ userId: req.body.userId });
       const appointments = await Appointment.find({ doctorId: doctor._id });
+      console.log(appointments);
       res.status(200).send({
         message: "Appointments fetched successfully",
         success: true,
         data: appointments,
+        
       });
     } catch (error) {
       console.log(error);

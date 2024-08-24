@@ -1,0 +1,40 @@
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
+  
+  .custom-search .ant-input-search {
+    border-radius: 50px;
+    background: linear-gradient(90deg, #A24AC4, #5967C9);
+  }
+  
+  .custom-search .ant-input {
+    border-radius: 50px 0 0 50px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    padding: 10px;
+  }
+  
+  .custom-search .ant-input::placeholder {
+    color: #ddd;
+  }
+  
+  .custom-search .ant-input-group-addon {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 50px 50px 0;
+  }
+  
+  .custom-search .ant-btn {
+    border-radius: 0 50px 50px 0;
+    background: none;
+    border: none;
+    color: #fff;
+  }
+  
+  .custom-search .ant-btn:hover {
+    color: #fff;
+    background: none;
+    border: none;
+  }
+  

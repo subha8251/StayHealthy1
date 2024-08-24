@@ -3,11 +3,12 @@ import moment from "moment";
 import React from "react";
 
 function DoctorForm({ onFinish, initivalValues }) {
+  
   return (
     <Form
       layout="vertical"
       onFinish={onFinish}
-      initialValues={{
+      initivalValues={{
         ...initivalValues,
         ...(initivalValues && {
           timings: initivalValues.timings
@@ -17,8 +18,11 @@ function DoctorForm({ onFinish, initivalValues }) {
               ]
             : [],
         }),
+        
       }}
+      
     >
+      
       <h1 className="card-title mt-3">Personal Information</h1>
       <Row gutter={20}>
         <Col span={8} xs={24} sm={24} lg={8}>

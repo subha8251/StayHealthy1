@@ -14,6 +14,7 @@ function ApplyDoctor() {
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const onFinish = async (values) => {
+    console.log(values);
     try {
       dispatch(showLoading());
       const response = await axios.post(
@@ -22,8 +23,8 @@ function ApplyDoctor() {
           ...values,
           userId: user._id,
           timings: [
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm"),
+            moment(new Date(values.timings[0])).format("HH:mm"),
+            moment(new Date(values.timings[1])).format("HH:mm")
           ],
         },
         {
@@ -32,6 +33,7 @@ function ApplyDoctor() {
           },
         }
       );
+      console.log(response);
       dispatch(hideLoading());
       if (response.data.success) {
         toast.success(response.data.message);
