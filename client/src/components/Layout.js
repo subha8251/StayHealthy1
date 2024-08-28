@@ -37,7 +37,7 @@ function Layout({ children }) {
     { name: "Home", path: "/", icon: "ri-home-line" },
     { name: "Appointments", path: "/doctor/appointments", icon: "ri-file-list-line" },
     {
-      name: "Profile",
+      name: "Update Profile",
       path: `/doctor/profile/${user?._id}`,
       icon: "ri-user-line",
     },

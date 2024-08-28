@@ -4,6 +4,26 @@ const User = require("../models/userModel");
 const Doctor = require("../models/doctorModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 
+router.delete("/delete-user/:id", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await User.findByIdAndUpdate(userId, { isDeleted: true });
+    await User.findByIdAndDelete(userId);
+
+    res.status(200).send({
+      message: "User marked as deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Error deleting user",
+      success: false,
+      error,
+    });
+  }
+});
+
 router.get("/get-all-doctors", authMiddleware, async (req, res) => {
   try {
     const doctors = await Doctor.find({});
@@ -24,7 +44,7 @@ router.get("/get-all-doctors", authMiddleware, async (req, res) => {
 
 router.get("/get-all-users", authMiddleware, async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({ isDeleted: false });
     res.status(200).send({
       message: "Users fetched successfully",
       success: true,
@@ -33,7 +53,7 @@ router.get("/get-all-users", authMiddleware, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      message: "Error applying doctor account",
+      message: "Error fetching users",
       success: false,
       error,
     });

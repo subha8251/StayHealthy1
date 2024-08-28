@@ -1,9 +1,10 @@
-import { Button, Col, Form, Input, Row, TimePicker } from "antd";
+import { Button, Col, Form, Input, Row, TimePicker, Select } from "antd";
 import moment from "moment";
 import React from "react";
 
+const { Option } = Select;
+
 function DoctorForm({ onFinish, initivalValues }) {
-  
   return (
     <Form
       layout="vertical"
@@ -18,11 +19,8 @@ function DoctorForm({ onFinish, initivalValues }) {
               ]
             : [],
         }),
-        
       }}
-      
     >
-      
       <h1 className="card-title mt-3">Personal Information</h1>
       <Row gutter={20}>
         <Col span={8} xs={24} sm={24} lg={8}>
@@ -50,7 +48,15 @@ function DoctorForm({ onFinish, initivalValues }) {
             required
             label="Phone Number"
             name="phoneNumber"
-            rules={[{ required: true }]}
+            rules={[
+              { required: true, message: "Please enter your phone number" },
+              { min: 10, message: "Phone number must be exactly 10 digits" },
+              { max: 10, message: "Phone number must be exactly 10 digits" },
+              {
+                pattern: /^[0-9]{10}$/,
+                message: "Phone number must be 10 digits and numeric only",
+              },
+            ]}
           >
             <Input placeholder="Phone Number" />
           </Form.Item>
@@ -86,7 +92,16 @@ function DoctorForm({ onFinish, initivalValues }) {
             name="specialization"
             rules={[{ required: true }]}
           >
-            <Input placeholder="Specialization" />
+            <Select placeholder="Select Specialization">
+              <Option value="Cardiology">Cardiology</Option>
+              <Option value="Dermatology">Dermatology</Option>
+              <Option value="Neurology">Neurology</Option>
+              <Option value="Pediatrics">Pediatrics</Option>
+              <Option value="Radiology">Radiology</Option>
+              <Option value="Psychiatry">Psychiatry</Option>
+              <Option value="Gynecology">Gynecology</Option>
+              <Option value="Urology">Urology</Option>
+            </Select>
           </Form.Item>
         </Col>
         <Col span={8} xs={24} sm={24} lg={8}>

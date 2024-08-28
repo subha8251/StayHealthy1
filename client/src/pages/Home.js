@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout";
-import { Col, Row } from "antd"; // Removed unnecessary imports
+import { Col, Row } from "antd";
 import Doctor from "../components/Doctor";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/alertsSlice";
-import { SearchOutlined } from "@ant-design/icons"; // Import the search icon
+import { SearchOutlined } from "@ant-design/icons";
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
@@ -23,7 +23,7 @@ function Home() {
       dispatch(hideLoading());
       if (response.data.success) {
         setDoctors(response.data.data);
-        setFilteredDoctors(response.data.data); // Initialize filteredDoctors
+        setFilteredDoctors(response.data.data);
       }
     } catch (error) {
       dispatch(hideLoading());
@@ -35,9 +35,15 @@ function Home() {
   }, []);
 
   const handleSearch = (value) => {
-    const filtered = doctors.filter((doctor) =>
-      doctor.specialization.toLowerCase().includes(value.toLowerCase())
-    );
+    const filtered = doctors.filter((doctor) => {
+      const name = doctor.firstName?.toLowerCase() || "";
+      const specialization = doctor.specialization?.toLowerCase() || "";
+  
+      return (
+        name.includes(value.toLowerCase()) ||
+        specialization.includes(value.toLowerCase())
+      );
+    });
     setFilteredDoctors(filtered);
   };
 
@@ -59,7 +65,7 @@ function Home() {
         >
           <input
             type="text"
-            placeholder="Search using specialization"
+            placeholder="Search using name or specialization"
             onChange={(e) => handleSearch(e.target.value)}
             style={{
               outline: "none",
