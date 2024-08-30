@@ -8,8 +8,6 @@ router.delete("/delete-user/:id", authMiddleware, async (req, res) => {
   try {
     const userId = req.params.id;
     await User.findByIdAndUpdate(userId, { isDeleted: true });
-    await User.findByIdAndDelete(userId);
-
     res.status(200).send({
       message: "User marked as deleted successfully",
       success: true,
