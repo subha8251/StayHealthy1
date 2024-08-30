@@ -31,8 +31,13 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
+    console.log(user);
     if (!user) {
       return res.status(200).send({ message: "User does not exist", success: false });
+    }
+    const blockedUser = user.isDeleted;
+    if (blockedUser){
+      return res.status(200).send({ message: "User has been blocked by Admin", success: false });
     }
     const isMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isMatch) {
@@ -50,6 +55,8 @@ router.post("/login", async (req, res) => {
 router.get("/get-user-info-by-id", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById({ _id: req.body.userId });
+    //console.log(user)
+    
     user.password = undefined;
     if (!user) {
       return res.status(200).send({ message: "User does not exist", success: false });

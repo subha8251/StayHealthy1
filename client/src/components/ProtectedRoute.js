@@ -19,7 +19,7 @@ function ProtectedRoute({ children }) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      //console.log(response.data)
+      console.log(response.data)
       dispatch(hideLoading());
       if (response.data.success) {
         dispatch(setUser(response.data.data));
