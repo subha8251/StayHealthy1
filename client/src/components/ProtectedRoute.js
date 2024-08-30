@@ -14,11 +14,12 @@ function ProtectedRoute({ children }) {
   const getUser = async () => {
     dispatch(showLoading());
     try {
-      const response = await axios.get("http://localhost:5000/api/user/get-user-info-by-id", {
+      const response = await axios.get("/api/user/get-user-info-by-id", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      //console.log(response.data)
       dispatch(hideLoading());
       if (response.data.success) {
         dispatch(setUser(response.data.data));
@@ -39,8 +40,6 @@ function ProtectedRoute({ children }) {
     if (!user && localStorage.getItem("token")) {
       getUser();
     }
-    
-    
   }, [user]);
 
   if (localStorage.getItem("token")) {

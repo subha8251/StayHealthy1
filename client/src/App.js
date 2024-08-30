@@ -1,7 +1,4 @@
 import React from "react";
-//import 'antd/dist/antd.css';
-//import { Button } from 'antd';
-// src/index.js or src/App.js
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";

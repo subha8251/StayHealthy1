@@ -39,7 +39,7 @@ function Userslist() {
       dispatch(hideLoading());
       if (response.data.success) {
         message.success("User blocked successfully");
-        // Update the UI by removing the deleted user from the state
+        
         setUsers(users.filter(user => user._id !== userId));
       } else {
         message.error("Failed to block user");
